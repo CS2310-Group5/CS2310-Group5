@@ -2,6 +2,21 @@
 
 A console-based, beginner-friendly Spot the Difference game and **reusable C++17 puzzle-generation library**. Players compare two emoji grids, enter coordinates to identify changed cells, and share puzzle codes to challenge friends.
 
+## Course and Team Members
+
+**Course:** CS2310  
+**Group:** 5
+
+Names are listed in **SURNAME Given Name** format.
+
+| No. | Name |
+| --- | --- |
+| 1 | CHIU Wai Yan |
+| 2 | CHOW Tsz Tung |
+| 3 | LEE Hei Tung |
+| 4 | WONG Cheuk Ying |
+| 5 | WONG Lai Lam |
+
 ## Motivation
 Traditional image-based Spot the Difference games require image assets and graphics libraries. We wanted a lightweight alternative that can be played in a terminal and adapted by other C++ developers for educational puzzles, memory games, and comparison challenges.
 
@@ -105,7 +120,4 @@ Tests check reproducibility, exact difference counts for all difficulties, guess
 - Agree on five concrete code contributions before splitting work; record actual names and contributions below.
 - Use pull requests to review changes before merging to `main`.
 
-## Credits
-Team members: **[Fill in names and contributions]**.
-Course: **[Fill in course]**.
-License: **[Team to decide]**.
+
