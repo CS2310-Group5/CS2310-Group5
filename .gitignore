@@ -1,0 +1,10 @@
+build/
+emoji_game
+generator_tests
+game
+*.o
+*.obj
+*.exe
+.DS_Store
+.vscode/
+.idea/

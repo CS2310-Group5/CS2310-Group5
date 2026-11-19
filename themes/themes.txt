@@ -1,0 +1,6 @@
+# Developer configuration: ThemeName|emoji1,emoji2,...
+# Save as UTF-8. Each theme needs at least 2 distinct symbols.
+Animals|🐱,🐶,🐼,🐸,🐰,🦊,🐻,🐯
+Food|🍎,🍌,🍇,🍓,🍕,🍔,🍩,🍪
+Nature|🌸,🌻,🌳,🍄,🌵,🍀,🌷,🌹
+Halloween|🎃,👻,🦇,💀,🍬,🕷️
