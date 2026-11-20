@@ -9,6 +9,8 @@
 #include <string>
 #include <vector>
 
+123
+
 using namespace emoji_puzzle;
 
 std::string readLine(const std::string& prompt) {
