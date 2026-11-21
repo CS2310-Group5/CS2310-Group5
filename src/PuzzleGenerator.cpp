@@ -1,5 +1,6 @@
 #include "PuzzleGenerator.h"
 #include <fstream>
+#include <random>
 #include <sstream>
 #include <stdexcept>
 #include <utility>
@@ -103,6 +104,22 @@ Puzzle generate(const Settings& settings) {
         p.modified[pos] = settings.theme.symbols[newIndex];
     }
     return p;
+}
+
+std::vector<std::pair<int, int>> getUnfoundAnswers(const Puzzle& p) {
+    std::vector<std::pair<int, int>> result;
+    for (int i = 0; i < p.size * p.size; ++i)
+        if (p.original[i] != p.modified[i] && !p.found[i])
+            result.emplace_back(i / p.size, i % p.size);
+    return result;
+}
+
+std::optional<std::pair<int, int>> getRandomUnfoundHint(const Puzzle& p) {
+    const auto remaining = getUnfoundAnswers(p);
+    if (remaining.empty()) return std::nullopt;
+    static std::mt19937 gen(std::random_device{}());
+    std::uniform_int_distribution<std::size_t> dist(0, remaining.size() - 1);
+    return remaining[dist(gen)];
 }
 
 GuessResult guess(Puzzle& p, int row, int col) {
