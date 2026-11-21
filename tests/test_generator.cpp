@@ -7,9 +7,12 @@ int main() {
     Settings s;
     s.theme = defaultThemes()[0];
     s.code = 12345;
-    for (int size : {4, 5, 6}) {
-        s.size = size;
-        s.differences = size == 4 ? 2 : size == 5 ? 4 : 6;
+    // Each case is {N, M}; includes custom values.
+    const int cases[][2] = {{4, 2}, {5, 4}, {6, 6}, {3, 9}, {7, 1}};
+    for (const auto& cs : cases) {
+        const int size = cs[0];
+        s.size = size;          // N
+        s.differences = cs[1];  // M
         Puzzle a = generate(s);
         Puzzle b = generate(s);
         assert(a.original == b.original && a.modified == b.modified);
@@ -28,9 +31,27 @@ int main() {
             }
         }
         assert(a.foundCount == s.differences);
+        assert(getUnfoundAnswers(a).empty());
+        assert(!getRandomUnfoundHint(a).has_value());
+        Puzzle c = generate(s);
+        auto all = getUnfoundAnswers(c);
+        assert(static_cast<int>(all.size()) == s.differences);
+        auto hint = getRandomUnfoundHint(c);
+        assert(hint.has_value());
+        assert(guess(c, hint->first, hint->second) == GuessResult::Correct);
+        assert(static_cast<int>(getUnfoundAnswers(c).size()) == s.differences - 1);
     }
     bool thrown = false;
     s.size = 1;
+    try { generate(s); } catch (const std::invalid_argument&) { thrown = true; }
+    assert(thrown);
+    // More emojis (M) than grid cells (N*N) must be rejected.
+    s.size = 3; s.differences = 10;
+    thrown = false;
+    try { generate(s); } catch (const std::invalid_argument&) { thrown = true; }
+    assert(thrown);
+    s.differences = 0;
+    thrown = false;
     try { generate(s); } catch (const std::invalid_argument&) { thrown = true; }
     assert(thrown);
     std::cout << "All generator tests passed.\n";
